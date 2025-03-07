@@ -68,6 +68,9 @@ class _ListenerState extends State<ListenerScreen> {
       });
       await _speech.stop();
     } else {
+      bool isInstalled = await isPackageInstalled('com.google.android.tts');
+      log('tts package installed ? $isInstalled');
+
       bool available = await _speech.initialize().then((val){
         log("init result = $val");
         return val;

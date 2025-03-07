@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'package:device_apps/device_apps.dart';
+
 class PermissionUtils {
   // 检查并请求麦克风权限
   static Future<bool> checkAndRequestMicrophonePermission(BuildContext context) async {
@@ -72,5 +74,15 @@ class PermissionUtils {
         ],
       ),
     );
+  }
+}
+
+Future<bool> isPackageInstalled(String packageName) async {
+  try {
+    bool isInstalled = await DeviceApps.isAppInstalled(packageName);
+    return isInstalled;
+  } catch (e) {
+    print('Error checking if app is installed: $e');
+    return false;
   }
 }
